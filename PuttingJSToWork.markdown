@@ -31,103 +31,52 @@
 ```
 
 
-# Control structures
+# Writing quality Javascript
 
 
-## Making decisions
-
+## If you forget var...
 ```
-function positiveOrNegative(n) {
-  if (n > 0) {
-	  console.log(n + " is positive");
-  } else {
-	  console.log(n + " is negative");
-  }
+function area(r) {
+  // note: missing var
+  result = Math.PI * (r * r); 
+  return result;
+}
+console.log(area(1)); // 3.1415...
+console.log(result); // 3.1415
+```
+> - the variable becomes _global_
+
+
+
+## Preventing accidental global variables
+```
+function area(r) {
+  "use strict";
+  result = Math.PI * (r * r); &LeftArrow; becomes an error (no var)
+  return result;
 }
 ```
+> - `"use strict;"`{.code} enables *strict mode*
+> - Makes missing *var* an error
+> - Use at start of script or function
 
-## Even simpler
 
-```
-function isPositive(n) {
-  return (n > 0);
-}
 
-if (isPositive(n)) 
-  console.log(n + " is positive") 
-else 
-  console.log(n + " is negative");
-```
+## Guidelines
 
-## Shorter (for experts)
+> - `"use strict;"`{.code} at top of file or function
+> - `===`{.code} and `!==`{.code} for equality
+> - Check code with [JSLint](http://www.jslint.com) or [JSHint](http://www.jshint.com)
 
-```
-console.log(n + " is " + (n > 0 ? "positive" : "negative"))
-```
 
-## Repeating yourself (do...while)
-
-```
-var x = 1;
-do {
-  console.log(x);
-  x = x + 1;
-} while (x <= 10)
-```
-
-## Repeating yourself (while)
-
-```
-var x = 1;
-while (x <= 10) {
-  console.log(x);
-  x = x + 1;
-}
-```
-
-## Repeating yourself (for)
-
-```
-var x;
-for (x=1; x <= 10; x = x + 1) { 
-  console.log(x);
-}
-```
-> - `var x = 1;`{.code} Set the value at the start
-> - `{ console.log(x); }`{.code} What we do each time (a **block**)
-> - `x <= 10;`{.code} Should we do it again?
-> - `x = x + 1`{.code} Set up for next time
-
-## Slightly shorter
-
-```
-for (var x=1; x <= 10; x++) { 
-  console.log(x);
-}
-```
 
 ## Practice
 
-- Count from 1 to 10 in the console.
-- Now do it backwards.
-- (Extra) Show whether each number is odd or even (hint: `(n % 2 == 0)`{.code} when even)
-
-
-
-# Geeky details
-
-*Extra credit*
-
-
-
-## Operators
-
-```
-+ - * / % ++
-```
-
-Also + and - in front of a number
-
+1. Declare `i = 1;`{.code} in a script (by itself)
+2. Show it with `console.log(j)`{.code}
+3. What happens when you put `"use strict";`{.code} at the top of the script?
+4. What happens when you change `i`{.code} into `var i`{.code}?
+5. (Challenge) Declare `var j = 2;`{.code} inside a function. Show it with console.log() inside and outside the function.
 
 
 ## What is Truth?
@@ -202,100 +151,11 @@ n !== 3 // true
 ```
 
 
-
 ## Practice
 
 - Write `isOdd(n)`{.code}
 - How short can you make it? (Hint: Use truthiness)
 - Write `isEven(n)`{.code} in a short form
-
-
-
-# Data structures
-
-
-
-
-## Making a list: Arrays
-
-```
-var a = [1, 2, 3];
-var b = ['a', 'b', 'c'];
-var c = ['a', 1, 'b', 2];
-console.log(a.length);
-console.log(b[1]);
-c[4] = 'c';
-```
-
-
-
-## Objects (preview)
-
-```
-var point = {x: 5, y: 3};
-var wizard = {name: "Great and mighty Oz", location: "Emerald City", behindCurtain: true };
-console.log(wizard.name);
-console.log(wizard[name]);
-wizard.name = "Oz";
-```
-
-
-
-## Practice
-
-- Make a list of your friends
-- Make an object with your name and other information about you
-- Print these using `console.log()`{.code}
-
-
-
-# Writing quality Javascript
-
-
-
-## If you forget var...
-```
-function area(r) {
-  // note: missing var
-  result = Math.PI * (r * r); 
-  return result;
-}
-console.log(area(1)); // 3.1415...
-console.log(result); // 3.1415
-```
-> - the variable becomes _global_
-
-
-
-## Preventing accidental global variables
-```
-function area(r) {
-  "use strict";
-  result = Math.PI * (r * r); &LeftArrow; becomes an error (no var)
-  return result;
-}
-```
-> - `"use strict;"`{.code} enables *strict mode*
-> - Makes missing *var* an error
-> - Use at start of script or function
-
-
-
-## Guidelines
-
-> - `"use strict;"`{.code} at top of file or function
-> - `===`{.code} and `!==`{.code} for equality
-> - Check code with [JSLint](http://www.jslint.com) or [JSHint](http://www.jshint.com)
-
-
-
-## Practice
-
-1. Declare `i = 1;`{.code} in a script (by itself)
-2. Show it with `console.log(j)`{.code}
-3. What happens when you put `"use strict";`{.code} at the top of the script?
-4. What happens when you change `i`{.code} into `var i`{.code}?
-5. (Challenge) Declare `var j = 2;`{.code} inside a function. Show it with console.log() inside and outside the function.
 
 
 # 2a: Working with objects
