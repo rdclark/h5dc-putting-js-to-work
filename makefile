@@ -4,8 +4,7 @@ PANDOC = /usr/local/bin/pandoc
 
 src = $(wildcard *.markdown)
 names = $(basename $(notdir $(src)))
-compiled = $(addsuffix .html,$(names)) $(addsuffix .opml,$(names))
-
+compiled = $(addsuffix .html,$(names))
 
 all: $(compiled) 
 
@@ -14,7 +13,4 @@ clean:
 
 %.html: %.markdown custom.css
 	$(PANDOC) $<  -i -s --slide-level 2 -f markdown -t revealjs -V revealjs-url=../reveal.js -V theme=serif --include-in-header custom.css -o $@
-
-%.opml: %.markdown
-	$(PANDOC) $<  -f markdown -t opml -o $@
 
