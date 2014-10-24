@@ -12,10 +12,9 @@
 
 ## Say a little about yourself
 
-- Who you are
-- What's your background
-- Any other programming experience?
-- What's one thing you'd like from today?
+>- Who you are
+>- What's your background
+>- What's one thing you'd like from today?
 
 # Getting started
 
@@ -839,224 +838,6 @@ window.onload = function() {
 </script>
 ```
 
-
-
-
-# jQuery
-
----
-
-[jQuery.com](http://www.jquery.com)
-
-- Utility library to simplify client-side programming
-- Normalizes differences between browsers (*ahem* IE...)
-- Provides simple animations
-- Simplifies complex tasks (e.g. Ajax)
-
---- 
-
-## The almighty $
-
-`$()` is the all-purpose function:
-- Searches for elements by selector (like querySelector/querySelectorAll)
-- Adds utility functions to DOM elements
-
-## Interactivity and animation
-
-```html
-<!DOCTYPE html>
-<meta charset=utf-8>
-<title>jQuery Animations</title>
-<script src="lib/jquery-2.1.1.js"></script>
-<h1>Hello!</h1>
-<script>
-$(document).ready(function() {
-  var h1 = $('h1');
-
-  var b1 = $('<button>Fade in</button>');
-  b1.insertAfter(h1);
-  b1.click(function() { h1.fadeIn() });
-});
-</script>
-```
-
-## Method chaining
-
-```
-var b1 = $('<button>Fade in</button>');
-b1.insertAfter(h1);
-b1.click(function() { h1.fadeIn() });
-```
-vs.
-```
-$('<button>Fade out</button>')
-  .insertAfter(h1)
-  .click(function() { h1.fadeOut() });
-```
-
-## Forms example
-
-```html
-<!DOCTYPE html>
-<meta charset=utf-8>
-<title>jQuery Form</title>
-<script src="lib/jquery-2.1.1.js"></script>
-<form>
-	<input type="text" placeholder="What is your name?">
-</form>
-<p>Welcome, <span id="name">stranger</span>
-<script>
-$(document).ready(function() {
-  var form = $(document.forms[0]); // or $('form')
-  var input = $('input');
-  form.submit(function(event) { 
-  	$('#name').html(input.val());
-  	input.val('');
-  	event.preventDefault();
-  })
-});
-</script>
-
-```
-
-## Practice
-
-Using the form example:
-
-1. Hide the paragraph when the page first loads.
-2. On submit, animate it into view.
-3. (Extra) Hide the paragraph if the entered text is empty. (Hint: `if ('')` is the same as `if (false)` )
-
-# Compatibility & Reliability
-
-## A problem...
-
-Not all browsers speak the same language
-
-- Two flavors of Javascript: ES3 vs. ES5
-- ...and JScript
-- (ES3/JScript: IE < 9)
-
-
-## Another problem...
-
-Not all browsers <s>speak the same language</s> have the same APIs
-
-- DOM level 2 vs. DOM level 3
-- Event model differences
-
-## Solutions
-
-- Compatibility tools: jQuery, ES5-shim, Modernizr
-- Testing tools: QUnit, Jasmine, JSTestDriver, Selenium
-
-# QUnit
-
-## Let's test some code
-
-```
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<title>Unit testing</title>
-<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.14.0.css">
-<div id="qunit"></div>
-<script src="http://code.jquery.com/qunit/qunit-1.14.0.js"></script>
-<script>
-  function average(x, y) {
-    return (x + y) / 2;
-  }
-</script>
-<script>
-  // ===== Tests =====
-  module("Averages");
-  
-  test("Two values", function() {
-    equal(average(2, 4), 3, "Even numbers");
-    equal(average(1, 2), 1.5, "Adjacent numbers");
-  });
-</script>
-```
-
-## The setup
-
-```
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<title>Unit testing</title>
-<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.14.0.css">
-<div id="qunit"></div>
-<script src="http://code.jquery.com/qunit/qunit-1.14.0.js"></script>
-<!-- Tests here -->
-```
-
-## The tests
-
-```
-  module("Averages");
-  
-  test("Two values", function() {
-    equal(average(2, 4), 3, "Even numbers");
-    equal(average(1, 2), 1.5, "Adjacent numbers");
-  });
-```
-
-## Testing HTML
-
-```
-<!DOCTYPE html>
-<meta charset="utf-8">
-<title>Table Example</title>
-<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.14.0.css">
-<div id="qunit"></div>
-<div id="qunit-fixture">
-	<table id=testTable />
-</div>
-<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="http://code.jquery.com/qunit/qunit-1.14.0.js"></script>
-```
-
-## The code
-
-```
-function addRow(numRows) {
-  numRows = numRows || 1;
-  var table = $('#testTable');
-  for (var i=0; i < numRows; i++) {
-	  table.append("<tr><td>Data!</td></tr>");
-  }
-}
-
-// ===== Tests =====
-
-module("Table modification");
-
-test("Initial conditions", function() {
-  ok($('#testTable'), "We have the table");
-  equal($('#testTable tr').length, 0, "No rows");
-});
-
-test("Add one row", function() {
-  addRow();
-  equal($('#testTable tr').length, 1, "One row");
-});
-```
-
-## JSTestRunner
-
-- Run tests on multiple browsers concurrently
-
-## Practice
-
-1. Can you implement averaging three numbers? (Write the test, watch it fail, fix the code, watch it pass)
-2. Can you average *n* numbers? (Hint: `arguments.length` and `arguments[n]`)
-3. (Extra) Add a test fixture
-
-
-
-
-
 # Speak Javascript like a native
 
 ## Please remember three things
@@ -1338,8 +1119,6 @@ for (var i=0; i < buttons.length; i++)
 1. Step through the final example in the debugger.
 2. Explain it to someone else. (Do you both agree?)
 
-# Take a break!
-
 # Alternate ways to create classes
 
 ## Do we need full classes?
@@ -1525,6 +1304,377 @@ JSON (Javascript Object Notation) is just a Javascript data object (no functions
 1. Define an array in Javascript. Encode it into JSON. 
 2. Define an object in Javascript. Encode it into JSON.
 3. Create a JSON string. Decode it.
+
+# Promises
+
+## Promises simplify asynchronous code
+
+Before:
+```javascript
+step1(function (value1) {
+    step2(value1, function(value2) {
+        step3(value2, function(value3) {
+            step4(value3, function(value4) {
+                // Do something with value4
+            });
+        });
+    });
+});
+```
+
+## With promises (using Q)
+
+```javascript
+Q.fcall(promisedStep1)
+.then(promisedStep2)
+.then(promisedStep3)
+.then(promisedStep4)
+.then(function (value4) {
+    // Do something with value4
+})
+.catch(function (error) {
+    // Handle any error from all above steps
+})
+.done();
+```
+
+## Networking without promises
+
+```
+var ws = new WebSocket("ws://echo.websocket.org");
+ws.onopen = function() {
+  ws.send("I hear an echo");
+}
+
+ws.onerror = function(err) {
+  console.log(err.data);
+  ws.close();
+}
+
+ws.onmessage = function(evt) {
+  console.log(evt.data);
+}
+
+function send(message) {
+  ws.send(message):
+}
+
+```
+
+## Easier networking with promises
+
+I would like to do this:
+
+```
+  open("ws://echo.websocket.org")
+    .then(send("hello, world"))
+  	.then(read)
+  	.then(print)
+  	.catch(function(error) {
+  	   console.log("ERROR " + error)
+  	 })
+  	.finally(close);
+
+```
+
+## Wrapping WebSocket in promises
+
+```
+function open(wsurl) {
+  return new Q.Promise(resolve, reject) {
+    var ws = new WebSocket(wsurl);`
+
+    ws.onopen = function() {
+      resolve(ws);
+    }
+
+    ws.onerror = function(err) {
+      reject(new Error(err.data));
+    }
+}
+```
+Usage:
+```
+  open("ws://echo.websocket.org").then(...
+```
+
+## Waiting for an event
+
+```
+function read(ws) {
+  return new Q.Promise(resolve) {
+    
+    ws.onmessage = function(evt) {
+      resolve(evt.data);
+    }
+  }
+}
+```
+
+## Utility functions
+
+```
+function close(ws) { ws.close() };
+
+function send(ws) return { function(message) { ws.send(message) }};
+
+function print(message) {
+  console.log(message);
+}
+```
+
+## When to use promises?
+
+- Talking to external services (e.g. via AJAX)
+- Local operations that take time (e.g. image loading)
+
+## Image loading example
+
+```
+function getImage(url) {
+
+  return new Q.Promise(resolve, reject) {
+    var image = new Image(url);
+    image.onload = function() {
+      resolve(image);
+    }
+    image.onerror = function(err) {
+      reject(err);
+    }
+  }
+}
+```
+
+```
+  getImage("./button.png").then(function(image) { ... });
+```
+
+## Other promise tricks
+
+- `promise.all([array of functions])` acts like `map`, runs all concurrently.
+- Serial actions:
+
+```
+  var messages = ["Hello", "goodbye"];
+  messages.reduce(function(ws, msg) { ws.send(message); return ws }, open("ws://echo.websocket.org"));
+```
+
+# Compatibility & Reliability
+
+## A problem...
+
+Not all browsers speak the same language
+
+- Two flavors of Javascript: ES3 vs. ES5
+- ...and JScript
+- (ES3/JScript: IE < 9)
+
+
+## Another problem...
+
+Not all browsers <s>speak the same language</s> have the same APIs
+
+- DOM level 2 vs. DOM level 3
+- Event model differences
+
+## Solutions
+
+- Compatibility tools: jQuery, ES5-shim, Modernizr
+- Testing tools: QUnit, Jasmine, JSTestDriver, Selenium
+
+# jQuery
+
+---
+
+[jQuery.com](http://www.jquery.com)
+
+- Utility library to simplify client-side programming
+- Normalizes differences between browsers (*ahem* IE...)
+- Provides simple animations
+- Simplifies complex tasks (e.g. Ajax)
+
+--- 
+
+## The almighty $
+
+`$()` is the all-purpose function:
+- Searches for elements by selector (like querySelector/querySelectorAll)
+- Adds utility functions to DOM elements
+
+## Interactivity and animation
+
+```html
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>jQuery Animations</title>
+<script src="lib/jquery-2.1.1.js"></script>
+<h1>Hello!</h1>
+<script>
+$(document).ready(function() {
+  var h1 = $('h1');
+
+  var b1 = $('<button>Fade in</button>');
+  b1.insertAfter(h1);
+  b1.click(function() { h1.fadeIn() });
+});
+</script>
+```
+
+## Method chaining
+
+```
+var b1 = $('<button>Fade in</button>');
+b1.insertAfter(h1);
+b1.click(function() { h1.fadeIn() });
+```
+vs.
+```
+$('<button>Fade out</button>')
+  .insertAfter(h1)
+  .click(function() { h1.fadeOut() });
+```
+
+## Forms example
+
+```html
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>jQuery Form</title>
+<script src="lib/jquery-2.1.1.js"></script>
+<form>
+	<input type="text" placeholder="What is your name?">
+</form>
+<p>Welcome, <span id="name">stranger</span>
+<script>
+$(document).ready(function() {
+  var form = $(document.forms[0]); // or $('form')
+  var input = $('input');
+  form.submit(function(event) { 
+  	$('#name').html(input.val());
+  	input.val('');
+  	event.preventDefault();
+  })
+});
+</script>
+
+```
+
+## Practice
+
+Using the form example:
+
+1. Hide the paragraph when the page first loads.
+2. On submit, animate it into view.
+3. (Extra) Hide the paragraph if the entered text is empty. (Hint: `if ('')` is the same as `if (false)` )
+
+# QUnit
+
+## Let's test some code
+
+```
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>Unit testing</title>
+<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.14.0.css">
+<div id="qunit"></div>
+<script src="http://code.jquery.com/qunit/qunit-1.14.0.js"></script>
+<script>
+  function average(x, y) {
+    return (x + y) / 2;
+  }
+</script>
+<script>
+  // ===== Tests =====
+  module("Averages");
+  
+  test("Two values", function() {
+    equal(average(2, 4), 3, "Even numbers");
+    equal(average(1, 2), 1.5, "Adjacent numbers");
+  });
+</script>
+```
+
+## The setup
+
+```
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>Unit testing</title>
+<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.14.0.css">
+<div id="qunit"></div>
+<script src="http://code.jquery.com/qunit/qunit-1.14.0.js"></script>
+<!-- Tests here -->
+```
+
+## The tests
+
+```
+  module("Averages");
+  
+  test("Two values", function() {
+    equal(average(2, 4), 3, "Even numbers");
+    equal(average(1, 2), 1.5, "Adjacent numbers");
+  });
+```
+
+## Testing HTML
+
+```
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Table Example</title>
+<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.14.0.css">
+<div id="qunit"></div>
+<div id="qunit-fixture">
+	<table id=testTable />
+</div>
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="http://code.jquery.com/qunit/qunit-1.14.0.js"></script>
+```
+
+## The code
+
+```
+function addRow(numRows) {
+  numRows = numRows || 1;
+  var table = $('#testTable');
+  for (var i=0; i < numRows; i++) {
+	  table.append("<tr><td>Data!</td></tr>");
+  }
+}
+
+// ===== Tests =====
+
+module("Table modification");
+
+test("Initial conditions", function() {
+  ok($('#testTable'), "We have the table");
+  equal($('#testTable tr').length, 0, "No rows");
+});
+
+test("Add one row", function() {
+  addRow();
+  equal($('#testTable tr').length, 1, "One row");
+});
+```
+
+## JSTestRunner
+
+- Run tests on multiple browsers concurrently
+
+## Practice
+
+1. Can you implement averaging three numbers? (Write the test, watch it fail, fix the code, watch it pass)
+2. Can you average *n* numbers? (Hint: `arguments.length` and `arguments[n]`)
+3. (Extra) Add a test fixture
+
+
+
+
+
+
 
 # Graphs and charts
 
