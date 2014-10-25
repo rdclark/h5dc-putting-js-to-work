@@ -1059,7 +1059,7 @@ function makeWizard(name, location, orientation) {
 
 ## Make an object with private variables
 
-"The []Module Pattern]()"
+"The [Module Pattern](http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html)"
 
 ```
 function makeCounter() {
@@ -1184,6 +1184,8 @@ step1(function (value1) {
 
 ## With promises (using Q)
 
+- Using the [Q](https://github.com/kriskowal/q) library
+
 ```javascript
 Q.fcall(promisedStep1)
 .then(promisedStep2)
@@ -1276,11 +1278,43 @@ function read(ws) {
 ```
 function close(ws) { ws.close() };
 
-function send(ws) return { function(message) { ws.send(message) }};
+function send(message) return { function(ws) { ws.send(message); return ws }};
 
 function print(message) {
   console.log(message);
 }
+```
+
+## There's a problem
+
+```
+  open("ws://echo.websocket.org") // returns ws
+    .then(send("hello, world"))   // consumes ws, returns ws
+  	.then(read)                   // consumes ws, returns string/binary
+  	.then(print)                  // consumes string/binary, returns nothing
+  	.catch(function(error) {
+  	   console.log("ERROR " + error)
+  	 })
+  	.finally(close);              // consumes ws...which may not be available!
+
+```
+
+## One way to resolve this
+
+```
+  var socket;
+  open("ws://echo.websocket.org")
+    .then(function(ws) { socket = ws }) // returns socket as a side-effect
+    .then(send("hello, world"))   		// and send uses that
+  	.then(read)							// so does read
+  	.then(print)
+  	.catch(function(error) {
+  	   console.log("ERROR " + error)
+  	 })
+  	.finally(function() {
+  	   if (socket) socket.close();
+  	 });
+
 ```
 
 ## When to use promises?
@@ -1683,8 +1717,6 @@ svg.append('path').datum(points).attr('class', 'line').attr('d', line);
 - Javascript Garden
 - [JSLint.com](http://JSLint.com)
 
----
+## Thank you!
 
-# Thank you!
-
-e: [richard.clark@kaazing.com](mailto:richard.clark@kaazing.com) t: @rdclark
+e: [rdclark@nextquestion.net](mailto:rdclark@nextquestion.net) t: @rdclark
